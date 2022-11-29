@@ -6,5 +6,5 @@
 # ajout des touches right and left 
 
 
-# ________player_________
+# -------player_------
 #   création function : move_right and move_left
