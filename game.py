@@ -22,6 +22,6 @@ class Game:
         return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
 
    
-    # def spawn_monster(self):
-    #     monster = Monster(self)
-    #     self.all_monsters.add(monster)
+    def spawn_monster(self):
+        monster = Monster(self)
+        self.all_monsters.add(monster)
