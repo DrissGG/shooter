@@ -7,7 +7,7 @@ pygame.init()
 
 # generer la fenetre de notre jeu 
 pygame.display.set_caption("Comet fall game")
-screen = pygame.display.set_mode((1080, 720))
+screen = pygame.display.set_mode((1080, 700))
 
 # importer de charger  l'arriere plan de notre jeu 
 background = pygame.image.load(('assets/bg.jpg'))
@@ -35,13 +35,17 @@ while running:
     # recupere les monstres de notre jeu 
     for monster in game.all_monsters:
         monster.forward()
+        monster.update_health_bar(screen)
+    
 
     # applique l'ensemble des images de mon groupe de projectiles
-    game.player.all_projectiles.draw((screen))
+    game.player.all_projectiles.draw(screen)
 
 
     # appliquer de images de mon groupe de monstre 
     game.all_monsters.draw(screen)
+
+    game.player.update_health_bar(screen)
 
     # verifier si le joueur souhaite aller a gauche ou a droite
     if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < screen.get_width():
@@ -49,7 +53,7 @@ while running:
     elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
         game.player.move_left()
 
-    print(game.player.rect.x) 
+    print(game.player.rect.x)   
     
 
     # mettre a jour l'ecran 
