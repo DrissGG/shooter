@@ -7,7 +7,7 @@ class Projectile(pygame.sprite.Sprite):
     # definir le constructeur 
     def __init__(self, player):
         super().__init__()
-        self.velocity = 2
+        self.velocity = 3
         self.player = player
         self.image = pygame.image.load('assets/projectile.png')
         self.image = pygame.transform.scale(self.image, (50,50))
@@ -32,9 +32,11 @@ class Projectile(pygame.sprite.Sprite):
         self.rotate()
 
         # verifier si le projectile entre en collision avec un  monstre
-        if self.player.game.check_collisioon(self, self.player.game.all_monsters):
+        for monster in  self.player.game.check_collisioon(self, self.player.game.all_monsters):
             # supprimer le projectile
             self.remove()
+            # infliger des degats 
+            monster.damage(self.player.attack)
 
         # verifier si notre projectile n'est plus présent sur l'écran 
         if self.rect.x > 1080:
