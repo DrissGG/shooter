@@ -8,3 +8,6 @@
 
 # -------player_------
 #   création function : move_right and move_left
+
+# ---------come_event--------
+# 
