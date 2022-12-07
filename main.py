@@ -36,7 +36,7 @@ running = True
 # boucle tant que  que cette condition est vrai
 while running:
     # appliquer l'arriere plan de notre jeu 
-    screen.blit(background, (0,-200))
+    screen.blit(background, (0, -200))
     
     # verifier si notre jeu a commencé ou non 
     if game.is_playing:

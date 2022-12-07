@@ -1,5 +1,6 @@
 from player import Player
 from monster import Monster
+from comet_event import CometFallEvent
 
 import pygame
 
@@ -15,9 +16,11 @@ class Game:
         self.all_players = pygame.sprite.Group()
         self.player = Player(self)
         self.all_players.add(self.player)
+        # generer l'evenement de pluie de comet
+        self.comet_event = CometFallEvent(self)
         #  group de monstre 
         self.all_monsters = pygame.sprite.Group()
-        self.pressed ={}
+        self.pressed = {}
         
 
     def start(self):
@@ -29,6 +32,7 @@ class Game:
     def game_over(self):
         # remettre le jeu a neuf, retirer les monstres, remttre le joueur a 100 DE VIE, JEU en  ATTENTE
         self.all_monsters = pygame.sprite.Group()
+        self.comet_event.all_comets = pygame.sprite.Group()
         self.player.health = self.player.max_health
         self.is_playing = False
 
@@ -36,6 +40,12 @@ class Game:
     def update(self, screen):
         # appliquer l'image de mon joueur 
         screen.blit(self.player.image, self.player.rect)
+
+        # actualiser la barre de vie du joueur
+        self.player.update_health_bar(screen)
+        # actualiser la barre d'evenement du jeu
+        self.comet_event.update_bar(screen)
+
 
         # recuperer les projectiles du joueuer
         for projectile in self.player.all_projectiles:
@@ -45,16 +55,20 @@ class Game:
         for monster in self.all_monsters:
             monster.forward()
             monster.update_health_bar(screen)
+
+        for comet in self.comet_event.all_comets:
+            comet.fall()
             
 
         # applique l'ensemble des images de mon groupe de projectiles
         self.player.all_projectiles.draw(screen)
 
 
-        # appliquer de images de mon groupe de monstre 
+        # appliquer de images de mon groupe de monstre
         self.all_monsters.draw(screen)
 
-        self.player.update_health_bar(screen)
+        # appliquer l'ensemble des images de cometes
+        self.comet_event.all_comets.draw(screen)
 
         # verifier si le joueur souhaite aller a gauche ou a droite
         if self.pressed.get(pygame.K_RIGHT) and self.player.rect.x + self.player.rect.width < screen.get_width():
