@@ -5,7 +5,7 @@ pygame.init()
 
 # definir une clock
 clock = pygame.time.Clock()
-FPS = 80  # frequence d'image par rapport au pc
+FPS = 60  # frequence d'image par rapport au pc
 
 
 # generer la fenetre de notre jeu 
@@ -70,7 +70,13 @@ while running:
 
         # detecter si la touche espace est declanche 
             if event.key == pygame.K_SPACE:
-                game.player.launch_projectile()
+                if game.is_playing:
+                    game.player.launch_projectile()
+                else:
+                        # mettre le jeu en mode lancer
+                        game.start()
+                        # jouer le son
+                        game.sound_manager.play('click')
 
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
@@ -80,6 +86,8 @@ while running:
             if play_button_rect.collidepoint(event.pos):
                 # mettre le jeu en mode lancer 
                 game.start()
+                # jouer le son
+                game.sound_manager.play('click')
 
     # fixer le nbre de fps sur ma clock fps = freq d'images
     clock.tick(FPS)

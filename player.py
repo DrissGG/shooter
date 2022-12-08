@@ -11,7 +11,7 @@ class Player(animation.AnimateSprite):
         self.game = game
         self.health = 100
         self.max_health = 100
-        self.attack = 80
+        self.attack = 20
         self.velocity = 3
         self.all_projectiles = pygame.sprite.Group()
         # self.image = pygame.image.load('assets/player.png')
@@ -50,6 +50,7 @@ class Player(animation.AnimateSprite):
         self.all_projectiles.add(Projectile(self))
         # demarrer l'animation du lancer
         self.start_animation()
+        self.game.sound_manager.play('tir')
 
 
     def move_right(self):
