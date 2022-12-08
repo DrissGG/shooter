@@ -3,6 +3,9 @@ import math
 import pygame
 pygame.init()
 
+# definir une clock
+clock = pygame.time.Clock()
+FPS = 80  # frequence d'image par rapport au pc
 
 
 # generer la fenetre de notre jeu 
@@ -77,6 +80,9 @@ while running:
             if play_button_rect.collidepoint(event.pos):
                 # mettre le jeu en mode lancer 
                 game.start()
+
+    # fixer le nbre de fps sur ma clock fps = freq d'images
+    clock.tick(FPS)
 
             
             

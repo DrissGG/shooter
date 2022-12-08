@@ -12,7 +12,7 @@ class Player(animation.AnimateSprite):
         self.health = 100
         self.max_health = 100
         self.attack = 80
-        self.velocity = 2
+        self.velocity = 3
         self.all_projectiles = pygame.sprite.Group()
         # self.image = pygame.image.load('assets/player.png')
         self.rect = self.image.get_rect()

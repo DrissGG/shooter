@@ -9,7 +9,7 @@ class Comet(pygame.sprite.Sprite):
         #definir l'image associe a cette comete
         self.image = pygame.image.load('assets/comet.png')
         self.rect = self.image.get_rect()
-        self.velocity = 2
+        self.velocity = 3
         self.rect.x = random.randint(20, 800)
         self.rect.y = - random.randint(0, 800)
         self.comet_event = comet_event
@@ -23,8 +23,8 @@ class Comet(pygame.sprite.Sprite):
             #remettre la barre a 0
             self.comet_event.reset_percent()
             #apparaitre les 2 premiers monstres
-            self.comet_event.game.spawn_monster()
-            self.comet_event.game.spawn_monster()
+            self.comet_event.game.start()
+            self.comet_event.game.start()
 
 
     def fall(self):
